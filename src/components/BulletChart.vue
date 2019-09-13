@@ -2,11 +2,18 @@
   <svg width="100%" height="65px">
     <svg preserveAspectRatio="none" viewBox="0 0 100 100">
       <rect class="bg" fill="#ccc" width="100%" height="40"></rect>
-      <rect class="data" fill="#0074d9" :width="parentData" height="40"></rect>
+      <rect
+        class="data"
+        fill="#0074d9"
+        v-show="siteLevelPercentage"
+        :width="siteLevelPercentage"
+        height="40"
+      ></rect>
       <rect
         class="data"
         fill="#000"
-        :width="childData"
+        :width="personalLevelPercentage"
+        v-show="siteLevelPercentage"
         y="16"
         height="8"
       ></rect>
@@ -36,12 +43,18 @@ export default Vue.extend({
       required: true
     }
   },
+  data() {
+    return {
+      siteLevel: 45,
+      personalLevel: 38
+    };
+  },
   computed: {
-    parentData(): string {
-      return "45%";
+    siteLevelPercentage(): string {
+      return `${this.siteLevel.toString()}%`;
     },
-    childData(): string {
-      return "38%";
+    personalLevelPercentage(): string {
+      return `${this.personalLevel.toString()}%`;
     }
   }
 });
